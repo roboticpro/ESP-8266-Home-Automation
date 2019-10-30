@@ -3,8 +3,6 @@
 
 
 #include "UbidotsESPMQTT.h"
-#include<WiFiManager.h>
-WiFiManager wifimanager;
 #include "DHT.h"        
 #define DHTTYPE DHT11
 #define dht_dpin D4
@@ -73,7 +71,6 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
 void setup() {
   Serial.begin(115200);
-  wifimanager.autoConnect("ESP8266 Home Automation","123456");
   dht.begin();
   client.ubidotsSetBroker("business.api.ubidots.com");
   client.setDebug(true); 
