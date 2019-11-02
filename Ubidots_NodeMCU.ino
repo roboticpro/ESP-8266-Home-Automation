@@ -25,7 +25,7 @@ Ubidots client(TOKEN);
 
 void callback(char* topic, byte* payload, unsigned int length) {
 
-  if ((String)topic == "/v1.6/devices/NodeMCU/Relay1/lv"){
+  if ((String)topic == "/v1.6/devices/nodemcu/relay1/lv"){
     int mytopic = atoi(topic);
     payload[length] = '\0';
     int mymsg = atoi ((const char*)payload);
@@ -34,7 +34,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     digitalWrite(Relay1, !val1);
   }
 
-  else if ((String)topic == "/v1.6/devices/NodeMCU/Relay2/lv"){
+  else if ((String)topic == "/v1.6/devices/nodemcu/relay2/lv"){
 
     int mytopic = atoi(topic);
     payload[length] = '\0';
@@ -43,7 +43,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     int val1 = mymsg;
     digitalWrite(Relay2, !val1);
   }
-  else if ((String)topic == "/v1.6/devices/NodeMCU/Relay3/lv"){
+  else if ((String)topic == "/v1.6/devices/nodemcu/relay3/lv"){
 
     int mytopic = atoi(topic);
     payload[length] = '\0';
@@ -52,7 +52,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
     int val1 = mymsg;
     digitalWrite(Relay3, !val1);
   }
-  else if ((String)topic == "/v1.6/devices/NodeMCU/Relay4/lv")
+  else if ((String)topic == "/v1.6/devices/nodemcu/relay4/lv")
   {
 
     int mytopic = atoi(topic);
@@ -84,10 +84,10 @@ void setup() {
   digitalWrite(Relay3, HIGH);
   digitalWrite(Relay4, HIGH);
   client.begin(callback);
-  client.ubidotsSubscribe("NodeMCU", "Relay1"); 
-  client.ubidotsSubscribe("NodeMCU", "Relay2");
-  client.ubidotsSubscribe("NodeMCU", "Relay3");
-  client.ubidotsSubscribe("NodeMCU", "Relay4");
+  client.ubidotsSubscribe("nodemcu", "relay1"); 
+  client.ubidotsSubscribe("nodemcu", "relay2");
+  client.ubidotsSubscribe("nodemcu", "relay3");
+  client.ubidotsSubscribe("nodemcu", "relay4");
 }
 
 void loop() {
@@ -96,14 +96,14 @@ void loop() {
 
   if (!client.connected()) {
     client.reconnect();
-    client.ubidotsSubscribe("NodeMCU", "Relay1");
-    client.ubidotsSubscribe("NodeMCU", "Relay2");
-    client.ubidotsSubscribe("NodeMCU", "Relay3");
-    client.ubidotsSubscribe("NodeMCU", "Relay4"); 
+    client.ubidotsSubscribe("nodemcu", "relay1");
+    client.ubidotsSubscribe("nodemcu", "relay2");
+    client.ubidotsSubscribe("nodemcu", "relay3");
+    client.ubidotsSubscribe("nodemcu", "relay4"); 
 
   }
-  client.add("temperature",t);
-  client.add("humidity",h);
-  client.ubidotsPublish("NodeMCU");
+  client.add("Temperature",t);
+  client.add("Humidity",h);
+  client.ubidotsPublish("nodemcu");
   client.loop();
 }
